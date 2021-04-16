@@ -139,7 +139,7 @@ class Animator {
     start(cb : Function) {
         if (!this.animated) {
             this.animated = true 
-            setInterval(cb, delay)
+            this.interval = setInterval(cb, delay)
         }
     }
     
@@ -158,7 +158,7 @@ class VBNode {
     state : State = new State()
 
     constructor(private i : number) {
-
+        this.addNeighbor()
     }
 
     addNeighbor() {
