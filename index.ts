@@ -211,3 +211,25 @@ class VBar {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    vb : VBar = new VBar()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.vb.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.vb.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.vb.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    } 
+}
